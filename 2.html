@@ -1,36 +1,28 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
-<!-- Mirrored from edux.pjwstk.edu.pl/ by HTTrack Website Copier/3.x [XR&CO'2013], Fri, 06 Dec 2013 02:00:24 GMT -->
-<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>GAKKO.EDU</title>
     <link rel="stylesheet" href="adds/style/standard2.css" type="text/css" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 </head>
 <body>
-<form name="aspnetForm" method="post" action="https://edux.pjwstk.edu.pl/Login.aspx" id="aspnetForm">
+
+
 
 <script type="text/javascript">
-//<![CDATA[
-var theForm = document.forms['aspnetForm'];
-if (!theForm) {
-    theForm = document.aspnetForm;
+function resize_iframe()
+{
+    var newsize = ($(window).height() - $("#header").height() - $("#menuBar").height() - 7); // 7 is menuBar padding
+    $("#content_iframe").css('height', newsize);
 }
-function __doPostBack(eventTarget, eventArgument) {
-    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
-        theForm.__EVENTTARGET.value = eventTarget;
-        theForm.__EVENTARGUMENT.value = eventArgument;
-        theForm.submit();
-    }
-}
-//]]>
-</script>
 
-<script type="text/javascript">
-//<![CDATA[
-if (typeof(Sys) === 'undefined') throw new Error('ASP.NET Ajax client-side framework failed to load.');
-//]]>
+window.onresize = resize_iframe;
+
+$(function() {
+    resize_iframe();
+});
 </script>
 
 <input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEWBAL12dOrBgK/1YTzDQLu8I/0DgLM97qYBauRf8TOlSU222UfmuujQuWny1gm" />
@@ -43,16 +35,17 @@ if (typeof(Sys) === 'undefined') throw new Error('ASP.NET Ajax client-side frame
 			<div style="float:right;">
                 <a id="ctl00_hplAdmin" href="1.html">Administrator</a>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			    <a id="ctl00_hplHelp" href="index.html">Pomoc</a>
+			    <a id="ctl00_hplHelp" href="index.html">Powrót</a>
 			    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			    <a href="dummy.html">Wyloguj</a>
 			</div>
              
 		</div>
 	<div id="calendar">
-<iframe src="https://www.google.com/calendar/embed?showTitle=0&amp;showPrint=0&amp;showCalendars=0&amp;height=600&amp;wkst=2&amp;bgcolor=%23FFFFFF&amp;src=pjwstktop1%40gmail.com&amp;color=%23853104&amp;ctz=Europe%2FWarsaw" style=" border-width:0 " width="800" height="600" frameborder="0" scrolling="no"></iframe>	</div>
+        <iframe id="content_iframe" src="https://www.google.com/calendar/embed?showTitle=0&amp;showPrint=0&amp;height=800&amp;showCalendars=0&amp;wkst=2&amp;bgcolor=%23FFFFFF&amp;src=pjwstktop1%40gmail.com&amp;color=%23853104&amp;ctz=Europe%2FWarsaw" style=" border-width:0 " width="100%" height="100%" frameborder="0" scrolling="no"></iframe>	
+    </div>
 </div>
-</form>
+
 </body>
 
 <!-- Mirrored from edux.pjwstk.edu.pl/Login.aspx by HTTrack Website Copier/3.x [XR&CO'2013], Fri, 06 Dec 2013 02:00:29 GMT -->
