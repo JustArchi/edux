@@ -18,7 +18,10 @@
 		else if (location.hash=='#docs')
 			$("#contNoMenu").load("1.html");
 		else
+		{
+			location.hash='#main';
 			$("#contNoMenu").load("login.html");
+		}
 		
 		$("#banner_toggle").click(function(evt)
 		{
@@ -42,7 +45,7 @@
 
 		$("#header").click(function(evt)
 		{
-			location.hash = "#";
+			location.hash = "#main";
 			$("#contNoMenu").load("login.html");
 		});
 
