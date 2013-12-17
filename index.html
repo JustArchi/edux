@@ -26,6 +26,8 @@
 			$("#header").slideToggle(300, function() {
 				resize_child();
 			});
+
+			$("#footer").slideToggle(200);
 		});
 
 		$("#button_admin").click(function(evt)
@@ -56,6 +58,9 @@ function resize_child()
 
     if (!($("#header").is(':visible')))
     	newsize += $("#header").height();
+
+    if (!($("#footer").is(':visible')))
+    	newsize += $("#footer").height();
 
     $("#contNoMenu").css('height', newsize);
 }
