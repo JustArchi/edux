@@ -59,7 +59,7 @@ body {
 	background-position: left top;
 	background-color:#c40f11;
 	/* border-bottom:2px #222 solid; */
-	
+	cursor: pointer;
 	font-size:26px;
 	color:#fff;
 }
@@ -83,6 +83,7 @@ body {
 	color: #222;
 	font-weight: normal;
 	text-decoration: none;
+	cursor: pointer;
 }
 
 #menuBar a:hover{
@@ -106,8 +107,8 @@ body {
 }
 
 #contNoMenu{
-	min-height: 300px;
-	height: auto !important;
+	/*min-height: 300px;
+	height: auto !important;*/
 	height: 300px;
 	font-family:Verdana, Arial, Helvetica, sans-serif;
 	font-size:12px;
@@ -118,11 +119,12 @@ body {
 	min-height: 33px;
 	height: auto !important;
 	height: 10px;
-	padding:9px;
+	padding: 0px 9px 0px 9px;
 	
 	font-family:Verdana, Arial, Helvetica, sans-serif;
 	font-size:10px;
 	text-align: center;
+	line-height: 33px;
 }
 
 #contLogout

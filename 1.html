@@ -1,54 +1,7 @@
-
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>GAKKO.EDU</title>
-    <link rel="stylesheet" href="adds/style/standard2.css" type="text/css" />
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-</head>
-
-<body>
-
 <script type="text/javascript">
-function resize_iframe()
-{
-    var newsize = ($(window).height() - $("#header").height() - $("#menuBar").height() - 7); // 7 is menuBar padding
-    $("#content_iframe").css('height', newsize);
-}
-
-window.onresize = resize_iframe;
-
-$(function() {
-    resize_iframe();
-});
+if ( window.self === window.top )
+    window.location="index.html#docs";
 </script>
-
-	<div id="container">
-		<div id="header"></div>
-        <div id="menuBar">
-		    <div style="float:left;">
-                <span id="ctl00_lblZalogowany"></span>
-            </div>
-			<div style="float:right;">
-                <a id="ctl00_hplAdmin" href="index.html">Powrót</a>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			    <a id="ctl00_hplHelp" href="calendar.html">Pomoc</a>
-			    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			    <a href="dummy.html">Wyloguj</a>
-			</div>
-             
-		</div>
-
-	<div id="asd">
-	<iframe id="content_iframe" src="https://docs.google.com/a/pjwstk.edu.pl/document/d/16yBaYbAPYDOpUth7c8tUiRexMrcXq7_3tcTTuk1FTLM/" width="100%" height="100%" frameBorder="0" scrolling="no">Browser not compatible.
+	
+    <iframe id="content_iframe" src="https://docs.google.com/a/pjwstk.edu.pl/document/d/16yBaYbAPYDOpUth7c8tUiRexMrcXq7_3tcTTuk1FTLM/" frameBorder="0" scrolling="no" style="width: 100%; height: 100%; position: relative;">
     </iframe>
-	</div>
-</div>
-
-</body>
-
-<!-- Mirrored from edux.pjwstk.edu.pl/Login.aspx by HTTrack Website Copier/3.x [XR&CO'2013], Fri, 06 Dec 2013 02:00:29 GMT -->
-</html>

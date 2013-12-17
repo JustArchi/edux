@@ -1,87 +1,91 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
-<!-- Mirrored from edux.pjwstk.edu.pl/ by HTTrack Website Copier/3.x [XR&CO'2013], Fri, 06 Dec 2013 02:00:24 GMT -->
-<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>GAKKO.EDU</title>
-    <link rel="stylesheet" href="adds/style/standard.css" type="text/css" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>GAKKO.EDU</title>
+	<link rel="stylesheet" href="adds/style/standard.css" type="text/css" />
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 </head>
 <body>
-<form name="aspnetForm" method="post" action="https://edux.pjwstk.edu.pl/Login.aspx" id="aspnetForm">
+
+	<script type="text/javascript">
+
+	$(function()
+	{
+		if (location.hash=='#calendar')
+			$("#contNoMenu").load("calendar.html");
+		else if (location.hash=='#docs')
+			$("#contNoMenu").load("1.html");
+		else
+			$("#contNoMenu").load("login.html");
+		
+		$("#banner_toggle").click(function(evt)
+		{
+			evt.preventDefault();
+			$("#header").slideToggle(300, function() {
+				resize_child();
+			});
+		});
+
+		$("#button_admin").click(function(evt)
+		{
+			$("#contNoMenu").load("1.html");
+		});
+
+		$("#button_help").click(function(evt)
+		{
+			$("#contNoMenu").load("calendar.html");
+		});
+
+		$("#header").click(function(evt)
+		{
+			location.hash = "#";
+			$("#contNoMenu").load("login.html");
+		});
+
+
+	});
+
+	</script>
 
 <script type="text/javascript">
-//<![CDATA[
-var theForm = document.forms['aspnetForm'];
-if (!theForm) {
-    theForm = document.aspnetForm;
+function resize_child()
+{
+    var newsize = ($(window).height() - $("#header").height() - $("#menuBar").height() - $("#footer").height() - 7); // 7 is menuBar padding
+
+    if (!($("#header").is(':visible')))
+    	newsize += $("#header").height();
+
+    $("#contNoMenu").css('height', newsize);
 }
-function __doPostBack(eventTarget, eventArgument) {
-    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
-        theForm.__EVENTTARGET.value = eventTarget;
-        theForm.__EVENTARGUMENT.value = eventArgument;
-        theForm.submit();
-    }
-}
-//]]>
+
+window.onresize = resize_child;
+
+$(function() {
+    resize_child();
+});
 </script>
 
-<script type="text/javascript">
-//<![CDATA[
-if (typeof(Sys) === 'undefined') throw new Error('ASP.NET Ajax client-side framework failed to load.');
-//]]>
-</script>
-
-<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEWBAL12dOrBgK/1YTzDQLu8I/0DgLM97qYBauRf8TOlSU222UfmuujQuWny1gm" />
 	<div id="container">
 		<div id="header"></div>
-        <div id="menuBar">
-		    <div style="float:left;">
-                <span id="ctl00_lblZalogowany"></span>
-                </div>
+		<div id="menuBar">
 			<div style="float:right;">
-                <a id="ctl00_hplAdmin" href="1.html">Administrator</a>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			    <a id="ctl00_hplHelp" href="calendar.html">Pomoc</a>
-			    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			    <a href="dummy.html">Wyloguj</a>
+				<a id="button_admin" href="#docs">Administrator</a>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<a id="button_help" href="#calendar">Pomoc</a>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<a id="banner_toggle" >Wyloguj</a>
 			</div>
-             
-		</div>				
-        <div id="contNoMenu">
-    <table class="login_form" cellspacing="0" cellpadding="1" border="0" id="ctl00_ContentPlaceHolder1_Login1">
-	<tr>
-		<td><table cellpadding="0" border="0">
-			<tr>
-				<td align="center" colspan="2">Logowanie</td>
-			</tr><tr>
-				<td align="right"><label for="ctl00_ContentPlaceHolder1_Login1_UserName">Login:</label></td><td><input name="ctl00$ContentPlaceHolder1$Login1$UserName" type="text" id="ctl00_ContentPlaceHolder1_Login1_UserName" />&nbsp;</td>
-			</tr><tr>
-				<td align="right"><label for="ctl00_ContentPlaceHolder1_Login1_Password">Hasło:</label></td><td><input name="ctl00$ContentPlaceHolder1$Login1$Password" type="password" id="ctl00_ContentPlaceHolder1_Login1_Password" />&nbsp;</td>
-			</tr><tr>
-				<td align="right" colspan="2"><input type="submit" name="ctl00$ContentPlaceHolder1$Login1$LoginButton" value="Zaloguj" id="ctl00_ContentPlaceHolder1_Login1_LoginButton" /></td>
-			</tr>
-		</table></td>
-	</tr>
-</table>
-    <a href="Changelog.txt">ChangeLog</a>
 
-	       <br style="clear: both;" />
+		</div>				
+		<div id="contNoMenu">
+			
 		</div>
-		
-		<div id="footer"><label>Edu@Gakko PJWSTK 2011-2013</label></div>
+
+		<div id="footer">Edu@Gakko PJWSTK 2011-2013</div>
 	</div>
 
-
-<script type="text/javascript">
-//<![CDATA[
-Sys.Application.initialize();
-//]]>
-</script>
-</form>
 </body>
 
 <!-- Mirrored from edux.pjwstk.edu.pl/ by HTTrack Website Copier/3.x [XR&CO'2013], Fri, 06 Dec 2013 02:00:27 GMT -->
