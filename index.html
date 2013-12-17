@@ -17,9 +17,11 @@
 			$("#contNoMenu").load("calendar.html");
 		else if (location.hash=='#docs')
 			$("#contNoMenu").load("1.html");
+		else if (location.hash=='#main')
+			$("#contNoMenu").load("login.html");
 		else
 		{
-			location.hash='#main';
+			window.location="index.html#main";
 			$("#contNoMenu").load("login.html");
 		}
 		
