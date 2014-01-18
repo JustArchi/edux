@@ -115,15 +115,15 @@ body
 	transition: all 0.2s;
 }
 
-#contNoMenu{
-	/*min-height: 300px;
-	height: auto !important;*/
+#contNoMenu
+{
 	height: 300px;
 	font-family:Verdana, Arial, Helvetica, sans-serif;
 	font-size:12px;
 }
 
-#footer{
+#footer
+{
 	background:url("../images/belka_dol.png");
 	min-height: 33px;
 	height: auto !important;
