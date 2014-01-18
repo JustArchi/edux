@@ -82,9 +82,25 @@
 						<li>
 							<a id="button_admin">Administrator</a>
 							<div id="dropmenu">
-								<a onclick='loadContent("main")'>Main</a>
-								<a onclick='loadContent("docs")'>Google Docs</a>
-								<a onclick='loadContent("calendar")'>Kalendarz</a>
+								<?php
+
+									include 'connect.php';
+									$link = mysqli_connect("127.0.0.1", $user, $password, "edux");
+
+									if (!$link)
+									{
+										die("Can't connect to MySQL: " . mysqli_connect_error());
+									}
+
+									if ($result = mysqli_query($link, "SELECT * FROM MenuOptions ORDER BY Position"))
+									{
+										while ($row = mysqli_fetch_array($result, MYSQL_ASSOC)) 
+										{
+									    	printf("<a onclick='loadContent(\"%s\")' >%s</a>", $row["Target"], $row["Title"]);
+										}
+									}
+									mysqli_close($link);
+								?>
 							</div>
 						</li>
 						<li>
