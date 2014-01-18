@@ -37,7 +37,13 @@
 
 		$("#button_admin").click(function(evt)
 		{
-			$("#contNoMenu").load("1.html");
+			$("#dropmenu").fadeIn(100);
+			// $("#contNoMenu").load("1.html");
+		});
+
+		$("#dropmenu").mouseleave(function(evt)
+		{
+			$("#dropmenu").fadeOut(100);
 		});
 
 		$("#button_help").click(function(evt)
@@ -50,6 +56,8 @@
 			location.hash = "#main";
 			window.location = "https://edux.pjwstk.edu.pl/";
 		});
+
+
 
 
 	});
@@ -79,20 +87,37 @@ $(function() {
 
 	<div id="container">
 		<div id="header"></div>
+
 		<div id="menuBar">
 			<div style="float:right;">
-				<a id="button_admin" href="#docs">Administrator</a>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<a id="button_help" href="#calendar">Pomoc</a>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<a id="banner_toggle" >Wyloguj</a>
+				<ul id="dropdown">
+					<li>
+						<a id="button_admin">Administrator</a>
+						<div id="dropmenu">
+							<a href="#main"  onclick='$("#contNoMenu").load("login.html");'>Main</a>
+							<a href="#docs"  onclick='$("#contNoMenu").load("1.html");'>Google Docs</a>
+							<a href="#calendar" onclick='$("#contNoMenu").load("calendar.html");'>Kalendarz</a>
+						</div>
+					</li>
+					<li>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					</li>
+					<li>
+						<a id="button_help" href="#calendar">Pomoc</a>
+					</li>
+					<li>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					</li>
+					<li>
+						<a id="banner_toggle" >Wyloguj</a></li>
+					</ul>
 			</div>
 
 		</div>				
 		<div id="contNoMenu">
 			
 		</div>
-
+<!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
 		<div id="footer">Edu@Gakko PJWSTK 2011-2013</div>
 	</div>
 
