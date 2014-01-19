@@ -63,6 +63,11 @@
 
 		function loadContent(target)
 		{
+			if (loadContent.previous_target == target)
+				return;
+
+			loadContent.previous_target = target
+
 			if (target=="main")
 				$("#contNoMenu").load(target + ".html"); //need iframe-resizing javascript
 			else
