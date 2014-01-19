@@ -24,8 +24,6 @@
 				$("#header").slideToggle(300, function() {
 					resize_child();
 				});
-
-				$("#footer").slideToggle(200);
 			});
 
 			$("#button_admin").click(function(evt)
@@ -49,13 +47,10 @@
 
 		function resize_child()
 		{
-		    var newsize = ($(window).height() - $("#header").height() - $("#menuBar").height() - $("#footer").height() - 7); // 7 is menuBar padding
+		    var newsize = ($(window).height() - $("#header").height() - $("#menuBar").height() - 7); // 7 is menuBar padding
 
 		    if (!($("#header").is(':visible')))
 		    	newsize += $("#header").height();
-
-		    if (!($("#footer").is(':visible')))
-		    	newsize += $("#footer").height();
 
 		    $("#contNoMenu").css('height', newsize);
 		}
@@ -124,7 +119,6 @@
 			<div id="contNoMenu">
 
 			</div>
-			<div id="footer">Edu@Gakko PJWSTK 2011-2013</div>
 		</div>
 	</body>
 </html>

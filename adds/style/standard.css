@@ -123,20 +123,6 @@ body
 	overflow: hidden;
 }
 
-#footer
-{
-	background:url("../images/belka_dol.png");
-	min-height: 33px;
-	height: auto !important;
-	height: 10px;
-	padding: 0px 9px 0px 9px;
-	
-	font-family:Verdana, Arial, Helvetica, sans-serif;
-	font-size:10px;
-	text-align: center;
-	line-height: 33px;
-}
-
 .login_form
 {
 	margin-left: auto;
