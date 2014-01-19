@@ -38,7 +38,7 @@
 
 			$("#header").click(function(evt)
 			{
-				window.location = "https://edux.pjwstk.edu.pl/";
+				loadContent("main");
 			});
 		});
 		</script>
