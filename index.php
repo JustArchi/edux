@@ -68,7 +68,10 @@
 
 		function loadContent(target)
 		{
-			$("#contNoMenu").load(target + ".html #child_content");
+			if (target=="main")
+				$("#contNoMenu").load(target + ".html"); //need iframe-resizing javascript
+			else
+				$("#contNoMenu").load(target + ".html #child_content");
 			location.hash = "#" + target;
 		}
 
