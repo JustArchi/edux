@@ -73,6 +73,8 @@
 			else
 				$("#contNoMenu").load(target + ".html #child_content");
 			location.hash = "#" + target;
+
+			$("#dropmenu").fadeOut(100);
 		}
 
 		</script>
