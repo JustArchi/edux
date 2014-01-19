@@ -104,6 +104,9 @@
 									}
 									mysqli_close($link);
 								?>
+
+								<a onclick="$('#embedux').attr('src', 'https://edux.pjwstk.edu.pl/logout.aspx');">Wyloguj PJWSTK</a>
+
 							</div>
 						</li>
 						<li>
