@@ -4,7 +4,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>GAKKO.EDU</title>
 		<link rel="stylesheet" href="adds/style/standard.css" type="text/css" />
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
 	</head>
 	<body>
 		<script type="text/javascript">
