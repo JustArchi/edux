@@ -134,7 +134,7 @@
 									mysqli_close($link);
 								?>
 
-								<a onclick="$('#embedux').attr('src', 'https://edux.pjwstk.edu.pl/logout.aspx');">Wyloguj PJWSTK</a>
+								<a onclick="$('#embedux').attr('src', 'https://edux.pjwstk.edu.pl/logout.aspx'); loadContent('main');">Wyloguj PJWSTK</a>
 
 							</div>
 						</li>
