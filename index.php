@@ -8,6 +8,22 @@
 	</head>
 	<body>
 		<script type="text/javascript">
+
+		var hideDropdownInterval;
+
+		function hideDropdown()
+		{
+				hideDropdownInterval = setInterval(function() {
+					$("#dropmenu").fadeOut(100);
+				}, 400);
+		}
+
+		function showDropdown()
+		{
+			$("#dropmenu").fadeIn(100);
+			clearInterval(hideDropdownInterval);
+		}
+
 		$(function()
 		{
 			if (location.hash=='')
@@ -26,15 +42,13 @@
 				});
 			});
 
-			$("#button_admin").mouseenter(function(evt)
-			{
-				$("#dropmenu").fadeIn(100);
-			});
+			$("#button_admin").mouseenter(showDropdown);
 
-			$("#dropmenu").mouseleave(function(evt)
-			{
-				$("#dropmenu").fadeOut(100);
-			});
+			$("#dropmenu").mouseenter(showDropdown);
+
+			$("#button_admin").mouseleave(hideDropdown);
+
+			$("#dropmenu").mouseleave(hideDropdown);
 
 			$("#header").click(function(evt)
 			{
