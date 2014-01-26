@@ -75,7 +75,7 @@
 			else
 				$("#loading").hide(0);
 
-			$("#contNoMenu").fadeOut(300, function() {
+			$("#contNoMenu").fadeOut(100, function() {
 				if (pageSet[target] == undefined)
 				{
 					$(".subpage").hide(0);
@@ -88,14 +88,14 @@
 						target_url += " #child_content";
 
 					$("#" + target).load(target_url, function() {
-						$("#contNoMenu").fadeIn(300);
+						$("#contNoMenu").fadeIn(100);
 					});
 				}
 				else
 				{
 					$(".subpage").hide(0);
 					$("#" + target).show(0);
-					$("#contNoMenu").fadeIn(300);
+					$("#contNoMenu").fadeIn(100);
 				}
 
 			});
