@@ -61,6 +61,8 @@
 		    resize_child();
 		});
 
+		var pageSet = new Object;
+
 		function loadContent(target)
 		{
 			if (loadContent.previous_target == target)
@@ -68,10 +70,35 @@
 
 			loadContent.previous_target = target
 
-			if (target=="main")
-				$("#contNoMenu").load(target + ".html"); //need iframe-resizing javascript
+			if (pageSet[target] == undefined)
+				$("#loading").show(0);
 			else
-				$("#contNoMenu").load(target + ".html #child_content");
+				$("#loading").hide(0);
+
+			$("#contNoMenu").fadeOut(300, function() {
+				if (pageSet[target] == undefined)
+				{
+					$(".subpage").hide(0);
+					$("#contNoMenu").append("<div class='subpage' id='" + target + "'></div>");
+					pageSet[target] = true;
+					
+					target_url = target + ".html";
+					
+					if (target != "main")
+						target_url += " #child_content";
+
+					$("#" + target).load(target_url, function() {
+						$("#contNoMenu").fadeIn(300);
+					});
+				}
+				else
+				{
+					$(".subpage").hide(0);
+					$("#" + target).show(0);
+					$("#contNoMenu").fadeIn(300);
+				}
+
+			});
 			location.hash = "#" + target;
 
 			$("#dropmenu").fadeOut(100);
@@ -126,8 +153,13 @@
 					</ul>
 				</div>
 			</div>				
-			<div id="contNoMenu">
+			<div id="page_container">
+				<div id="contNoMenu">
 
+				</div>
+				<div id="loading">
+					Loading...
+				</div>	
 			</div>
 		</div>
 	</body>
