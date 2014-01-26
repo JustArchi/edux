@@ -26,7 +26,7 @@
 				});
 			});
 
-			$("#button_admin").click(function(evt)
+			$("#button_admin").mouseenter(function(evt)
 			{
 				$("#dropmenu").fadeIn(100);
 			});
