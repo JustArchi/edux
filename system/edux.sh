@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # First of all make sure that we won't leave child-zombies behind, including parent-zombies as well
-trap "rm -f $PIDFILE && kill 0" SIGINT SIGTERM EXIT
+trap "kill 0" SIGINT SIGTERM EXIT
 
 # Sync local repo with remote git repo
 update() {
@@ -9,19 +9,18 @@ update() {
 	local ourBranch=`git rev-parse --abbrev-ref HEAD`
 	local ourRepo="origin"
 	while :; do
-			git pull $ourRepo $ourBranch
-			if [ -e DEVELOPMENT ]; then
-					sleep 60
-			else
-					sleep 3600
-			fi
+		git pull $ourRepo $ourBranch
+		if [ -e DEVELOPMENT ]; then
+			sleep 60
+		else
+			sleep 3600
+		fi
 	done
 }
 
 # Initial variables
 BACKGROUND=false
 USER="pmir"
-PIDFILE="/tmp/edux.pid"
 
 # Parse args
 for arg in $@; do
@@ -45,9 +44,6 @@ if (! $BACKGROUND); then
 	bash $0 "background" $@ &
 	exit 0
 fi
-
-# Write our PID to file
-echo $$ > $PIDFILE
 
 # Turn off verbose
 exec 1>/dev/null
