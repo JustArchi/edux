@@ -96,10 +96,7 @@
 					$("#contNoMenu").append("<div class='subpage' id='" + target + "'></div>");
 					pageSet[target] = true;
 					
-					target_url = target + ".html";
-					
-					if (target != "main")
-						target_url += " #child_content";
+					target_url = target + ".php";
 
 					$("#" + target).load(target_url, function() {
 						$("#contNoMenu").fadeIn(100);

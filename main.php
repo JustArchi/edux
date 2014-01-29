@@ -1,3 +1,11 @@
+<?php
+if ($_SERVER["HTTP_X_REQUESTED_WITH"] != "XMLHttpRequest" )
+{
+	header('Location: index.php#' . basename(__FILE__, ".php"));
+}
+?>
+
+
 <script type="text/javascript">
 function fix_iframe_height()
 {
