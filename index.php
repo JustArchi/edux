@@ -100,6 +100,7 @@
 
 					$("#" + target).load(target_url, function() {
 						$("#contNoMenu").fadeIn(100);
+						resize_child();
 					});
 				}
 				else
@@ -107,6 +108,7 @@
 					$(".subpage").hide(0);
 					$("#" + target).show(0);
 					$("#contNoMenu").fadeIn(100);
+					resize_child();
 				}
 
 			});
