@@ -49,6 +49,7 @@ body
 	height: auto !important;
 	height: 27px;
 	font-size: 12px;
+	margin-bottom: -3px;
 }
 
 #menuBar a
