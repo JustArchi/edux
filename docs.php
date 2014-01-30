@@ -38,7 +38,7 @@ if ($_SERVER["HTTP_X_REQUESTED_WITH"] != "XMLHttpRequest" )
 		?>
 
 	</div>
-	<div id="docs_body">
+	<div id="docs_body" class="maxheight">
 		<iframe id="docs_frame" 
 				src="" 
 				frameBorder="0" 
