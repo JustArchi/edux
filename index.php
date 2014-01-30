@@ -66,7 +66,7 @@
 
 		function resize_child()
 		{
-		    var newsize = ($(window).height() - $("#header").height() - $("#menuBar").height() - 7); // 7 is menuBar padding
+		    var newsize = ($(window).height() - $("#header").height() - $("#menuBar").outerHeight() + 3); // 3 is the negative margin
 
 		    if (!($("#header").is(':visible')))
 		    	newsize += $("#header").height();
