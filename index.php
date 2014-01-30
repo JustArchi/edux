@@ -26,14 +26,19 @@
 
 		$(function()
 		{
-			if (location.hash=='')
+			window.onhashchange = function()
 			{
-				loadContent("main");
-			}
-			else
-			{
-				loadContent(location.hash.substring(1));
-			}
+				if (location.hash=='')
+				{
+					loadContent("main");
+				}
+				else
+				{
+					loadContent(location.hash.substring(1));
+				}
+			};
+
+			window.onhashchange();
 			
 			$("#banner_toggle").click(function(evt)
 			{
