@@ -66,7 +66,7 @@
 		    if (!($("#header").is(':visible')))
 		    	newsize += $("#header").height();
 
-		    $("#contNoMenu").css('height', newsize);
+		    $(".maxheight").css('height', newsize);
 		}
 
 		window.onresize = resize_child;
@@ -165,7 +165,7 @@
 				</div>
 			</div>				
 			<div id="page_container">
-				<div id="contNoMenu">
+				<div id="contNoMenu" class="maxheight">
 
 				</div>
 				<div id="loading">

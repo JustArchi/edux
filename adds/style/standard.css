@@ -162,5 +162,61 @@ body
 	font-weight: 100;
 	text-align: center;
 	line-height: 300px;
-
 }
+
+#docs_list
+{
+	top: 0px;
+	left: 0px;
+	width: 200px;
+	height: 400px;
+	float:left;
+	background: #444;
+}
+
+#docs_list a
+{
+	background: white;
+	padding-top: 7px;
+	padding-bottom: 7px;
+	border-style: solid;
+	border-width: 1px;
+	border-color: rgb(0,0,0);
+	padding-left: 24px;
+	padding-right: 24px;
+	margin-bottom: -1px;
+	transition: all 0.1s;
+	display: block;
+}
+
+#docs_list a:hover
+{
+	background: #cccccc;
+	text-decoration: none;
+	transition: all 0.2s;
+}
+
+#docs_list_header
+{
+	background: white;
+	padding-top: 12px;
+	padding-bottom: 12px;
+	padding-left: 12px;
+	border-style: solid;
+	border-width: 1px;
+	border-color: rgb(0,0,0);
+	margin-bottom: -1px;
+}
+
+#docs_list a.selected 
+{
+	background: #abf;
+	margin-left: 5px;
+}
+
+#docs_body
+{
+	margin-left: 200px;
+	height: 100%;
+	background: #eee;
+}	
