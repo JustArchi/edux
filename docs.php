@@ -6,10 +6,21 @@ if ($_SERVER["HTTP_X_REQUESTED_WITH"] != "XMLHttpRequest" )
 ?>
 
 <script type="text/javascript">
+	var docsSet = new Object();
 	function show(id, a)
 	{
+		$(".docs_frame").hide();
+		if (docsSet[id] == undefined)
+		{
+			$("#docs_body").append("<iframe id='docs_frame_" + id + "' src='https://docs.google.com/document/d/" + a + "' class='docs_frame' frameBorder='0' scrolling='no' style='width: 100%; height: 100%;'></iframe>");
+			docsSet[id] = true;
+		}
+		else
+		{
+			$("#docs_frame_" + id).show();
+		}
+
 		$(".selected").removeClass("selected");
-		$("#docs_frame").attr('src', "https://docs.google.com/document/d/" + a);
 		$("#" + id).addClass("selected");
 	}
 </script>
@@ -39,11 +50,7 @@ if ($_SERVER["HTTP_X_REQUESTED_WITH"] != "XMLHttpRequest" )
 
 	</div>
 	<div id="docs_body" class="maxheight">
-		<iframe id="docs_frame" 
-				src="" 
-				frameBorder="0" 
-				scrolling="no" 
-				style="width: 100%; height: 100%;"></iframe>
+
 	</div>
 
 </div>
