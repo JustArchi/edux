@@ -14,6 +14,10 @@ if ($_SERVER["HTTP_X_REQUESTED_WITH"] != "XMLHttpRequest" )
 		{
 			$("#docs_body").append("<iframe id='docs_frame_" + id + "' src='https://docs.google.com/document/d/" + a + "' class='docs_frame' frameBorder='0' scrolling='no' style='width: 100%; height: 100%;'></iframe>");
 			docsSet[id] = true;
+
+			setTimeout(function() {
+				$("#" + id).append("<span class='doc_status'>OTWARTY</span>");
+			}, 2000);
 		}
 		else
 		{

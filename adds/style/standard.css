@@ -177,6 +177,7 @@ body
 
 #docs_list a
 {
+	line-height: 16px;
 	background: white;
 	padding-top: 7px;
 	padding-bottom: 7px;
@@ -221,3 +222,11 @@ body
 	height: 100%;
 	background: #eee;
 }	
+
+.doc_status
+{
+	font-size: 75%;
+	color: green;
+	line-height: 19px;
+	float: right;
+}
