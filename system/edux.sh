@@ -71,7 +71,7 @@ trap "kill 0" SIGINT SIGTERM EXIT
 # Now when we're ready, we can make use of our user and pass
 user=$(sed -n 1p /tmp/edux)
 pass=$(sed -n 2p /tmp/edux)
-#rm -f /tmp/edux
+rm -f /tmp/edux
 
 # Let's set more variables now
 cd /home/$USER/www/edux
