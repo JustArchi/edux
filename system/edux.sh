@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# First of all make sure that we won't leave child-zombies behind, including parent-zombies as well
-trap "kill 0" SIGINT SIGTERM EXIT
-
 # Sync local repo with remote git repo
 update() {
 	cd ~/www/edux
@@ -48,6 +45,9 @@ fi
 # Turn off verbose
 exec 1>/dev/null
 exec 2>&1
+
+# Set traps to prevent leaving zombies behind
+trap "kill 0" SIGINT SIGTERM EXIT
 
 # Turn on all daemons
 update &
