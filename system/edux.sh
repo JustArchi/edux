@@ -18,6 +18,7 @@ eduxsftp() {
 	if [ $(mount | grep $server | wc -l) -eq 0 ]; then
 		local remoteMountPoint="public"
 		local mountPoint="/home/pmir/www/edux/sftp"
+		mkdir -p $mountPoint
 		echo "$pass" | sshfs -o allow_other -o auto_unmount -o password_stdin -oServerAliveInterval=60 -oServerAliveCountMax=5 $user@$server:$remoteMountPoint $mountPoint
 	fi
 }
