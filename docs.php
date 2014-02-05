@@ -7,17 +7,18 @@ if ($_SERVER["HTTP_X_REQUESTED_WITH"] != "XMLHttpRequest" )
 
 <script type="text/javascript">
 	var docsSet = new Object();
-	function show(id, a)
+	function show(id)
 	{
 		$(".docs_frame").hide();
 		if (docsSet[id] == undefined)
 		{
-			$("#docs_body").append("<iframe id='docs_frame_" + id + "' src='https://docs.google.com/document/d/" + a + "' class='docs_frame' frameBorder='0' scrolling='no' style='width: 100%; height: 100%;'></iframe>");
-			docsSet[id] = true;
-
+			$("#docs_body").append("<iframe id='docs_frame_" + id + "' src='https://docs.google.com/document/d/" + id + "' class='docs_frame' frameBorder='0' scrolling='no' style='width: 100%; height: 100%;'></iframe>");
+			
 			setTimeout(function() {
-				$("#" + id).append("<span class='doc_status'>OTWARTY</span>");
+				$("#docs_button_" + id).append("<span class='doc_status'>OTWARTY</span>");
 			}, 2000);
+
+			docsSet[id] = true;
 		}
 		else
 		{
@@ -25,14 +26,49 @@ if ($_SERVER["HTTP_X_REQUESTED_WITH"] != "XMLHttpRequest" )
 		}
 
 		$(".selected").removeClass("selected");
-		$("#" + id).addClass("selected");
+		$("#docs_button_" + id).addClass("selected");
+	}
+
+	function addDoc()
+	{
+		$("#dialog-modal-state1").show();
+		$("#dialog-modal-state2").hide();
+		$( "#dialog-modal" ).dialog({
+			modal: true
+		});
+	}
+
+	function doAddGoogleDoc()
+	{
+		$("#dialog-modal-state1").hide(100);
+		$("#dialog-modal-state2").show(100);
+
+		var name = $("#new_doc_name").val();
+		$.get("add_doc.php", { name : name }).done(function(data) {
+			$("#dialog-modal").dialog("close");
+			document.location.reload(true);
+		})		
 	}
 </script>
+
+<div id="dialog-modal" class="dialog" style='display:none' title="Utwórz nowy dokument">
+	<div id="dialog-modal-state1">
+		<p>Podaj tytuł dokumentu:</p>
+		<form>
+			<input id="new_doc_name" type="text"></input>
+			<input onclick="doAddGoogleDoc();" type="submit" value="   OK   "></input>
+		</form>
+	</div>
+	<div id="dialog-modal-state2" style="display:none">
+		Zaczekaj...
+	</div>
+</div>
 
 <div id="child_content">
 	<div id="docs_list" class="maxheight">
 
 		<div id="docs_list_header">Wybierz dokument:</div>
+		<div id="docs_list_content">
 		<?php
 			include 'connect.php';
 			$link = mysqli_connect("127.0.0.1", $user, $password, "edux");
@@ -41,16 +77,19 @@ if ($_SERVER["HTTP_X_REQUESTED_WITH"] != "XMLHttpRequest" )
 			{
 				die("Can't connect to MySQL: " . mysqli_connect_error());
 			}
-
+			
 			if ($result = mysqli_query($link, "SELECT * FROM DocumentList"))
 			{
 				while ($row = mysqli_fetch_array($result, MYSQL_ASSOC)) 
 				{
-			    	printf("<a id='%s' onclick=show('%s','%s')>%s</a>", $row["ID"], $row["ID"], $row["Target"], $row["Title"]);
+			    	printf("<a id='docs_button_%s' onclick=show('%s')>%s</a>", $row["Target"], $row["Target"], $row["Title"]);
 				}
 			}
 			mysqli_close($link);
 		?>
+		</div>
+
+		<a style='margin-left:60px;' id='add_new_doc' onclick='addDoc()'>Utwórz nowy...</a>
 
 	</div>
 	<div id="docs_body" class="maxheight">
