@@ -6,7 +6,7 @@
 		<link rel="stylesheet" href="adds/style/standard.css" type="text/css" />
 		<script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
 		<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-		<link rel="stylesheet" href="adds/style/jquery-ui.css" type="text/css" >
+		<link rel="stylesheet" href="adds/style/jquery-ui.css" type="text/css" />
 	</head>
 	<body>
 		<script type="text/javascript">
