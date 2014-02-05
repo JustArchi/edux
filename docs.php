@@ -46,17 +46,28 @@ if ($_SERVER["HTTP_X_REQUESTED_WITH"] != "XMLHttpRequest" )
 		var name = $("#new_doc_name").val();
 		$.get("add_doc.php", { name : name }).done(function(data) {
 			$("#dialog-modal").dialog("close");
-			document.location.reload(true);
+			document.location.reload();
 		})		
 	}
+
+	$(function() {
+		$("#new_doc_name").keyup(function (event) {
+			if (event.which == 13)
+			{
+				event.preventDefault();
+				doAddGoogleDoc();
+			}
+		});
+	});
+
 </script>
 
 <div id="dialog-modal" class="dialog" style='display:none' title="Utwórz nowy dokument">
 	<div id="dialog-modal-state1">
 		<p>Podaj tytuł dokumentu:</p>
-		<form>
+		<form onsubmit="return false;">
 			<input id="new_doc_name" type="text"></input>
-			<input onclick="doAddGoogleDoc();" type="submit" value="   OK   "></input>
+			<input onclick="doAddGoogleDoc();" type="button" value="   OK   "></input>
 		</form>
 	</div>
 	<div id="dialog-modal-state2" style="display:none">

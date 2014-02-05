@@ -36,7 +36,10 @@
 				}
 				else
 				{
-					loadContent(location.hash.substring(1));
+					if (location.hash[1] == '/')
+						loadContent(location.hash.substring(2));
+					else
+						loadContent(location.hash.substring(1));
 				}
 			};
 
@@ -119,8 +122,8 @@
 				}
 
 			});
-			location.hash = "#" + target;
-
+			location.hash = "#/" + target;
+			//location.search = "?page=" + target;
 			$("#dropmenu").fadeOut(100);
 		}
 
