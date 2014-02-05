@@ -9,7 +9,7 @@ $title = $_GET["name"];
 $auth = new Google_AssertionCredentials(
     $service_account_email,
     $drive_scope,
-    file_get_contents( $privatekey_filename );
+    file_get_contents( $privatekey_filename )
 );
 
 $client = new Google_Client();
