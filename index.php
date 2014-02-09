@@ -130,7 +130,9 @@
 		</script>
 
 		<div id="container">
-			<div id="header"></div>
+			<div id="header">
+				<noscript> <span class="error_banner"> Jeśli cokolwiek ma działać to plz, <a href="http://www.enable-javascript.com/">włącz javascript</a> </span> </noscript>
+			</div>
 			<div id="menuBar">
 				<div style="float:right;">
 					<ul id="dropdown">
