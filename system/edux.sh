@@ -19,7 +19,7 @@ eduxsftp() {
 		local remoteMountPoint="public"
 		local mountPoint="/home/pmir/www/edux/sftp"
 		mkdir -p $mountPoint
-		echo "$pass" | sshfs -C -o ro -o allow_other -o auto_unmount -o password_stdin -oServerAliveInterval=60 -oServerAliveCountMax=5 $user@$server:$remoteMountPoint $mountPoint
+		echo "$pass" | sshfs -C -o ro -o reconnect -o auto_cache -o cache_timeout=86400 -o allow_other -o auto_unmount -o password_stdin -o ServerAliveInterval=60 -o ServerAliveCountMax=5 $user@$server:$remoteMountPoint $mountPoint
 	fi
 }
 
