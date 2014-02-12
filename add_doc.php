@@ -29,7 +29,7 @@ $permission->setValue('me');
 $permission->setWithLink(true);
 $service->permissions->insert($file->getId(), $permission);
 
-$link = mysqli_connect("127.0.0.1", $user, $password, "edux");
+$link = mysqli_connect("127.0.0.1", $user, $password, $database);
 
 if (!$link)
 {

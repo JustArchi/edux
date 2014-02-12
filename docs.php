@@ -82,7 +82,7 @@ if ($_SERVER["HTTP_X_REQUESTED_WITH"] != "XMLHttpRequest" )
 		<div id="docs_list_content">
 		<?php
 			include 'connect.php';
-			$link = mysqli_connect("127.0.0.1", $user, $password, "edux");
+			$link = mysqli_connect("127.0.0.1", $user, $password, $database);
 
 			if (!$link)
 			{
