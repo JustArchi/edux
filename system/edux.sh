@@ -59,7 +59,7 @@ eduxsftp() {
 		echo "EDUXSFTP: Remote Mount Point: $remoteMountPoint"
 		echo "EDUXSTFP: Mounting now!"
 		mkdir -p $SCRIPTDIR/../sftp
-		echo "$SFTPPASS" | sshfs -C -o ro -o reconnect -o auto_cache -o cache_timeout=86400 -o allow_other -o auto_unmount -o password_stdin -o ServerAliveInterval=60 -o ServerAliveCountMax=5 -o StrictHostKeyChecking=no -o to_code=UTF-8 $SFTPUSER@$SFTP:$remoteMountPoint $SCRIPTDIR/../sftp
+		echo "$SFTPPASS" | sshfs -C -o ro -o reconnect -o auto_cache -o cache_timeout=86400 -o allow_other -o auto_unmount -o password_stdin -o ServerAliveInterval=60 -o ServerAliveCountMax=5 -o StrictHostKeyChecking=no $SFTPUSER@$SFTP:$remoteMountPoint $SCRIPTDIR/../sftp
 		echo "EDUXSFTP: Done!"
 		if [ $(mount | grep $SFTP | wc -l) -eq 0 ]; then
 			echo "EDUXSFTP: It looks like we failed, sad"
