@@ -23,19 +23,26 @@ eduxoneshot() {
 	return 0
 }
 
+eduxphpcron() {
+	php -f $SCRIPTDIR/../../private/cron.php >$SCRIPTDIR/../../private/cron.log 2>&1
+}
+
 eduxcron() {
 	local TASKS=""
 
+	if [ -e $SCRIPTDIR/../../private/cron.php ]; then
+		echo "EDUXCRON: Found cron.php file, executing every 60 seconds"
+		TASKS+="eduxphpcron "
+	else
+		echo "EDUXCRON: Could not find cron.php file, eduxphpcron is disabled"
+	fi
 	#TASKS+="eduxupdate "
-	#ourRepo="origin"
-	#ourBranch=$(git rev-parse --abbrev-ref HEAD)
 
-	#TASKS+="eduxsftp "
 	if [ $(echo "$TASKS" | wc -w) -gt 0 ]; then
 		while :; do
 			for TASK in $TASKS; do
 				echo "EDUXCRON: Calling task: $TASK"
-				$TASK "START" &
+				$TASK &
 			done
 			sleep 60
 		done
@@ -44,7 +51,7 @@ eduxcron() {
 }
 
 eduxupdate() {
-	git pull $ourRepo $ourBranch
+	git pull origin master
 }
 
 eduxstart() {
