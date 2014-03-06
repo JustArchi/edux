@@ -143,6 +143,7 @@ eduxsftp() {
 # Initial variables
 BACKGROUND=false
 SCRIPTDIR=$(dirname $(realpath $0))
+SECUREDIR="/var/www/clients/client2"
 
 # Check user
 USER=$(ls -l $0 | awk '{print $3}')
@@ -170,10 +171,10 @@ done
 # If we're called as root, fix it, drop privileges
 if [ $(whoami) != "$USER" ] && [ $(whoami) != "$ORIGUSER" ]; then
 	# Only root can read user and pass, so let's store it for future use
-	rm -f /tmp/edux
-	echo $(grep "user" $SCRIPTDIR/../../private/sftp.pass | cut -d'=' -f2) >> /tmp/edux
-	echo $(grep "pass" $SCRIPTDIR/../../private/sftp.pass | cut -d'=' -f2) >> /tmp/edux
-	chown $USER /tmp/edux
+	rm -f $SECUREDIR/edux.pass
+	echo $(grep "user" $SCRIPTDIR/../../private/sftp.pass | cut -d'=' -f2) >> $SECUREDIR/edux.pass
+	echo $(grep "pass" $SCRIPTDIR/../../private/sftp.pass | cut -d'=' -f2) >> $SECUREDIR/edux.pass
+	chown $USER $SECUREDIR/edux.pass
 	su $USER -c "bash $0 &"
 	exit 0
 fi
@@ -193,9 +194,9 @@ echo "EDUX: Detected user $USER"
 echo "EDUX: Detected folder $SCRIPTDIR"
 
 # Now when we're ready, we can make use of our user and pass
-SFTPUSER=$(sed -n 1p /tmp/edux)
-SFTPPASS=$(sed -n 2p /tmp/edux)
-rm -f /tmp/edux
+SFTPUSER=$(sed -n 1p $SECUREDIR/edux.pass)
+SFTPPASS=$(sed -n 2p $SECUREDIR/edux.pass)
+rm -f $SECUREDIR/edux.pass
 
 # Call all services
 cd $SCRIPTDIR/..
