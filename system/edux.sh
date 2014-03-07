@@ -143,7 +143,7 @@ eduxsftp() {
 # Initial variables
 BACKGROUND=false
 SCRIPTDIR=$(dirname $(realpath $0))
-SECUREDIR="/var/www/clients/client2"
+SECUREDIR="/var/www/clients/client2/web6/web"
 
 # Check user
 USER=$(ls -l $0 | awk '{print $3}')
@@ -175,7 +175,7 @@ if [ $(whoami) != "$USER" ] && [ $(whoami) != "$ORIGUSER" ]; then
 	echo $(grep "user" $SCRIPTDIR/../../private/sftp.pass | cut -d'=' -f2) >> $SECUREDIR/edux.pass
 	echo $(grep "pass" $SCRIPTDIR/../../private/sftp.pass | cut -d'=' -f2) >> $SECUREDIR/edux.pass
 	chown $USER $SECUREDIR/edux.pass
-	su $USER -c "bash $0 &"
+	su $USER -c "bash $0 background &"
 	exit 0
 fi
 
