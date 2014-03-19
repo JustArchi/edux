@@ -167,7 +167,7 @@ done
 # If we're called as root, fix it, drop privileges
 if [ $(whoami) != "$USER" ] && [ $(whoami) != "$ORIGUSER" ]; then
 	# Only root can read user and pass, so let's store it for future use
-	rm -f $SCRIPTDIR/../..//edux.pass
+	rm -f $SCRIPTDIR/../../edux.pass
 	echo $(grep "user" $SCRIPTDIR/../../private/sftp.pass | cut -d'=' -f2) >> $SCRIPTDIR/../../private/edux.pass
 	echo $(grep "pass" $SCRIPTDIR/../../private/sftp.pass | cut -d'=' -f2) >> $SCRIPTDIR/../../private/edux.pass
 	chown $USER $SCRIPTDIR/../../private/edux.pass
