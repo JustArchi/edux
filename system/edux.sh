@@ -14,23 +14,23 @@ eduxoneshot() {
 
 	TASKS+="eduxsftp "
 
-	if [ $(echo "$TASKS" | wc -w) -gt 0 ]; then
+	if [ "$(echo "$TASKS" | wc -w)" -gt 0 ]; then
 		for TASK in $TASKS; do
 			echo "EDUXONESHOT: Calling task: $TASK"
-			$TASK "$MODE"
+			"$TASK" "$MODE"
 		done
 	fi
 	return 0
 }
 
 eduxphpcron() {
-	php -f $SCRIPTDIR/../../private/cron.php >$SCRIPTDIR/../../private/cron.log 2>&1
+	php -f "$SCRIPTDIR/../../private/cron.php" > "$SCRIPTDIR/../../private/cron.log" 2>&1
 }
 
 eduxcron() {
 	local TASKS=""
 
-	if [ -e $SCRIPTDIR/../../private/cron.php ]; then
+	if [ -e "$SCRIPTDIR/../../private/cron.php" ]; then
 		echo "EDUXCRON: Found cron.php file, executing every 60 seconds"
 		TASKS+="eduxphpcron "
 	else
@@ -38,11 +38,11 @@ eduxcron() {
 	fi
 	#TASKS+="eduxupdate "
 
-	if [ $(echo "$TASKS" | wc -w) -gt 0 ]; then
+	if [ "$(echo "$TASKS" | wc -w)" -gt 0 ]; then
 		while :; do
 			for TASK in $TASKS; do
 				echo "EDUXCRON: Calling task: $TASK"
-				$TASK &
+				"$TASK" &
 			done
 			sleep 60
 		done
@@ -67,20 +67,21 @@ eduxstop() {
 eduxexit() {
 	eduxstop
 	echo "EDUX: Exiting!"
-	echo $(date)
+	date
 	kill 0 # Bye
 	exit 0
 }
 
 eduxwatcher() {
 	local WATCHFOLDER="$SCRIPTDIR/../../private/backend"
-	mkdir -p $WATCHFOLDER
+	mkdir -p "$WATCHFOLDER"
+	find "$WATCHFOLDER" -type f -exec rm -f {} \;
 	echo "EDUXWATCHER: Active!"
 	while :; do
-		inotifywait -qe create $WATCHFOLDER
+		inotifywait -qe create "$WATCHFOLDER"
 		for i in "RESTART" "STOP"; do
-			if [ -e $WATCHFOLDER/$i ]; then
-				rm -f $WATCHFOLDER/$i
+			if [ -e "$WATCHFOLDER/$i" ]; then
+				rm -f "$WATCHFOLDER/$i"
 				case "$i" in
 					"RESTART") eduxstop && eduxstart ;;
 					"STOP") eduxexit ;;
@@ -96,7 +97,7 @@ eduxsftp() {
 	local SFTP="sftp.pjwstk.edu.pl"
 	case "$1" in
 		"START")
-			if [ $(mount | grep $SFTP | wc -l) -eq 0 ]; then
+			if [ "$(mount | grep -q "$SFTP"; echo $?)" -ne 0 ]; then
 				local remoteMountPoint="public"
 				echo "EDUXSFTP: It looks like our SSHFS isn't available yet, mounting..."
 				if [ ! -z "$SFTPPASS" ]; then
@@ -107,10 +108,10 @@ eduxsftp() {
 				fi
 				echo "EDUXSFTP: User: $SFTPUSER + Host: $SFTP + Mount Point: $SCRIPTDIR/../sftp + Remote Mount Point: $remoteMountPoint"
 				echo "EDUXSTFP: Mounting now!"
-				mkdir -p $SCRIPTDIR/../sftp
-				echo "$SFTPPASS" | sshfs -C -o ro -o reconnect -o auto_cache -o cache_timeout=86400 -o allow_other -o auto_unmount -o password_stdin -o ServerAliveInterval=60 -o ServerAliveCountMax=5 -o StrictHostKeyChecking=no $SFTPUSER@$SFTP:$remoteMountPoint $SCRIPTDIR/../sftp
+				mkdir -p "$SCRIPTDIR/../sftp"
+				echo "$SFTPPASS" | sshfs -o password_stdin -C -o ro -o reconnect -o auto_cache -o allow_other -o auto_unmount -o ServerAliveInterval=60 -o ServerAliveCountMax=5 -o StrictHostKeyChecking=no "$SFTPUSER"@"$SFTP":"$remoteMountPoint" "$SCRIPTDIR/../sftp"
 				echo "EDUXSFTP: Done!"
-				if [ $(mount | grep $SFTP | wc -l) -eq 0 ]; then
+				if [ "$(mount | grep -q "$SFTP"; echo $?)" -ne 0 ]; then
 					echo "EDUXSFTP: It looks like we failed mounting, sad"
 				else
 					echo "EDUXSFTP: It looks like it mounted fine!"
@@ -120,14 +121,14 @@ eduxsftp() {
 			fi
 		;;
 		"STOP")
-			if [ $(mount | grep $SFTP | wc -l) -eq 0 ]; then
+			if [ "$(mount | grep -q "$SFTP"; echo $?)" -ne 0 ]; then
 				echo "EDUXSFTP: SFTP is unmounted already!"
 			else
 				echo "EDUXSTFP: Unmounting now!"
-				kill $(pidof sshfs)
+				kill "$(pidof sshfs)"
 				echo "EDUXSFTP: Done!"
 				sleep 1
-				if [ $(mount | grep $SFTP | wc -l) -eq 0 ]; then
+				if [ "$(mount | grep -q "$SFTP"; echo $?)" -ne 0 ]; then
 					echo "EDUXSFTP: It looks like it unmounted fine!"
 				else
 					echo "EDUXSFTP: It looks like we failed unmounting!"
@@ -138,46 +139,46 @@ eduxsftp() {
 }
 
 # Initial variables
-BACKGROUND=false
-SCRIPTDIR=$(dirname $(realpath $0))
+BACKGROUND=0
+SCRIPTDIR="$(dirname "$0")"
 
 # Check user
-USER=$(ls -l $0 | awk '{print $3}')
+USER="$(stat -c %U "$0")"
 
 # This should be enough in most cases, however we could have user with /bin/false shell, therefore we can't use su -c
 # Let's MAKE SURE that our user has /bin/bash shell
-ORIGUSER=$USER
-USER=$(id -u $USER)
-USER=$(cat /etc/passwd | grep -i "$USER" | grep -i "/bin/bash" | head -n 1 | cut -d':' -f1)
+ORIGUSER="$USER"
+USER="$(id -u "$USER")"
+USER="$(grep -i "$USER" /etc/passwd | grep -i "/bin/bash" | head -n 1 | cut -d':' -f1)"
 
 # Turn on logging
-echo -n "" > $SCRIPTDIR/../../private/edux.log
-chown $USER $SCRIPTDIR/../../private/edux.log
+> "$SCRIPTDIR/../../private/edux.log"
+chown "$USER" "$SCRIPTDIR/../../private/edux.log"
 
-exec 1>$SCRIPTDIR/../../private/edux.log
-exec 2>&1
+#exec 1>"$SCRIPTDIR/../../private/edux.log"
+#exec 2>&1
 
 # Parse args
-for arg in $@; do
-	case "$arg" in
-		"background") BACKGROUND=true ;;
+for ARG in "$@"; do
+	case "$ARG" in
+		background|BACKGROUND) BACKGROUND=1 ;;
 	esac
 done
 
 # If we're called as root, fix it, drop privileges
-if [ $(whoami) != "$USER" ] && [ $(whoami) != "$ORIGUSER" ]; then
+if [ "$(whoami)" != "$USER" ] && [ "$(whoami)" != "$ORIGUSER" ]; then
 	# Only root can read user and pass, so let's store it for future use
-	rm -f $SCRIPTDIR/../../edux.pass
-	echo $(grep "user" $SCRIPTDIR/../../private/sftp.pass | cut -d'=' -f2) >> $SCRIPTDIR/../../private/edux.pass
-	echo $(grep "pass" $SCRIPTDIR/../../private/sftp.pass | cut -d'=' -f2) >> $SCRIPTDIR/../../private/edux.pass
-	chown $USER $SCRIPTDIR/../../private/edux.pass
-	su $USER -c "bash $0 background &"
+	rm -f "$SCRIPTDIR/../../edux.pass"
+	grep "user" "$SCRIPTDIR/../../private/sftp.pass" | cut -d'=' -f2 >> "$SCRIPTDIR/../../private/edux.pass"
+	grep "pass" "$SCRIPTDIR/../../private/sftp.pass" | cut -d'=' -f2 >> "$SCRIPTDIR/../../private/edux.pass"
+	chown "$USER" "$SCRIPTDIR/../../private/edux.pass"
+	su "$USER" -c "bash $0 background &"
 	exit 0
 fi
 
 # Make sure we're running in the background
-if (! $BACKGROUND); then
-	bash $0 "background" &
+if [ "$BACKGROUND" -ne 1 ]; then
+	bash "$0" "background" &
 	exit 0
 fi
 
@@ -185,17 +186,16 @@ fi
 trap "kill 0" SIGINT SIGTERM EXIT
 
 echo "EDUX: Welcome!"
-echo $(date)
+date
 echo "EDUX: Detected user $USER"
 echo "EDUX: Detected folder $SCRIPTDIR"
 
 # Now when we're ready, we can make use of our user and pass
-SFTPUSER=$(sed -n 1p $SCRIPTDIR/../../private/edux.pass)
-SFTPPASS=$(sed -n 2p $SCRIPTDIR/../../private/edux.pass)
-rm -f $SCRIPTDIR/../../private/edux.pass
+SFTPUSER="$(sed -n 1p "$SCRIPTDIR/../../private/edux.pass")"
+SFTPPASS="$(sed -n 2p "$SCRIPTDIR/../../private/edux.pass")"
+rm -f "$SCRIPTDIR/../../private/edux.pass"
 
 # Call all services
-cd $SCRIPTDIR/..
 eduxstart
 eduxcron &
 eduxwatcher &
