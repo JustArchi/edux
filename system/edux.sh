@@ -155,8 +155,8 @@ USER="$(grep -i "$USER" /etc/passwd | grep -i "/bin/bash" | head -n 1 | cut -d':
 > "$SCRIPTDIR/../../private/edux.log"
 chown "$USER" "$SCRIPTDIR/../../private/edux.log"
 
-#exec 1>"$SCRIPTDIR/../../private/edux.log"
-#exec 2>&1
+exec 1>"$SCRIPTDIR/../../private/edux.log"
+exec 2>&1
 
 # Parse args
 for ARG in "$@"; do
