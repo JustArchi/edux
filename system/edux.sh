@@ -115,7 +115,7 @@ eduxsftp() {
 	case "$MODE" in
 		"START")
 			if [[ "$(mount | grep -q "$SFTP"; echo $?)" -ne 0 ]]; then
-				local remoteMountPoint="public"
+				local remoteMountPoint="/$SFTPUSER/public"
 				echo "EDUXSFTP: It looks like our SSHFS isn't available yet, mounting..."
 				if [[ ! -z "$SFTPPASS" ]]; then
 					echo "EDUXSFTP: Password is set!"
